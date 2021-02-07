@@ -45,13 +45,13 @@ func (bt *compliancebeat) Run(b *beat.Beat) error {
 
 	for _, checkConfig := range bt.config.Checks {
 		// take this block out
-		fmt.Println(checkConfig.Name)
-		fmt.Println(checkConfig.Path)
-		fmt.Println(checkConfig.Period)
-		fmt.Println(checkConfig.Category)
-		fmt.Println(checkConfig.Enabled)
-		fmt.Println(checkConfig.Params)
-		fmt.Println(len(checkConfig.Params))
+		// fmt.Println(checkConfig.Name)
+		// fmt.Println(checkConfig.Path)
+		// fmt.Println(checkConfig.Period)
+		// fmt.Println(checkConfig.Category)
+		// fmt.Println(checkConfig.Enabled)
+		// fmt.Println(checkConfig.Params)
+		// fmt.Println(len(checkConfig.Params))
 		// take block out
 
 		var sc scripting.Script
