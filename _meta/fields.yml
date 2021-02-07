@@ -7,3 +7,31 @@
       required: true
       description: >
         PLEASE UPDATE DOCUMENTATION
+    - name: compliance.name
+      type: keyword
+      required: true
+      description: Specific function name in script performing check
+    - name: compliance.resultlevelnumber
+      type: byte
+      required: true
+      description: Overall numerical status result based on aggregate of individual checks in script
+    - name: compliance.resultlevel
+      type: keyword
+      required: true
+      description: Overall status result based on aggregate of individual checks in script
+    - name: compliance.status
+      type: keyword
+      required: true
+      description: Individual check status level.
+    - name: compliance.eventid
+      type: keyword
+      required: true
+      description: Event ID for each run. ID will be the same for each individual check for a run.
+    - name: compliance.messagetext
+      type: text
+      required: true
+      description: Message text from individual check
+    - name: compliance.category
+      type: keyword
+      required: true
+      description: Category of check. Examples include ActiveDirectory, Web, FileServer.

@@ -3,12 +3,18 @@
 
 package config
 
-import "time"
+type CheckConfig struct {
+	Name     string   `yaml:"name"`
+	Path     string   `yaml:"path"`
+	Category string   `yaml:"category"`
+	Period   string   `yaml:"period"`
+	Enabled  bool     `yaml:"enabled"`
+	Program  string   `yaml:"program"`
+	Params   []string `yaml:params`
+}
 
 type Config struct {
-	Period time.Duration `config:"period"`
+	Checks []CheckConfig
 }
 
-var DefaultConfig = Config{
-	Period: 1 * time.Second,
-}
+var DefaultConfig = Config{}

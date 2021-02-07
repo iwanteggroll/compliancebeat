@@ -2,13 +2,14 @@ package beater
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/logp"
 
+	"github.com/iwanteggroll/compliancebeat/check"
 	"github.com/iwanteggroll/compliancebeat/config"
+	"github.com/iwanteggroll/compliancebeat/scripting"
 )
 
 // compliancebeat configuration.
@@ -42,26 +43,56 @@ func (bt *compliancebeat) Run(b *beat.Beat) error {
 		return err
 	}
 
-	ticker := time.NewTicker(bt.config.Period)
-	counter := 1
+	for _, checkConfig := range bt.config.Checks {
+		// take this block out
+		fmt.Println(checkConfig.Name)
+		fmt.Println(checkConfig.Path)
+		fmt.Println(checkConfig.Period)
+		fmt.Println(checkConfig.Category)
+		fmt.Println(checkConfig.Enabled)
+		fmt.Println(checkConfig.Params)
+		fmt.Println(len(checkConfig.Params))
+		// take block out
+
+		var sc scripting.Script
+		checkInstance := check.ComplianceCheck{}
+		sc = checkInstance.Setup(&checkConfig)
+
+		go checkInstance.Run(func(events []beat.Event) {
+			bt.client.PublishAll(events)
+		}, sc)
+
+	}
+
 	for {
 		select {
 		case <-bt.done:
 			return nil
-		case <-ticker.C:
 		}
-
-		event := beat.Event{
-			Timestamp: time.Now(),
-			Fields: common.MapStr{
-				"type":    b.Info.Name,
-				"counter": counter,
-			},
-		}
-		bt.client.Publish(event)
-		logp.Info("Event sent")
-		counter++
 	}
+
+	return nil
+
+	// ticker := time.NewTicker(bt.config.Period)
+	// counter := 1
+	// for {
+	// 	select {
+	// 	case <-bt.done:
+	// 		return nil
+	// 	case <-ticker.C:
+	// 	}
+
+	// 	event := beat.Event{
+	// 		Timestamp: time.Now(),
+	// 		Fields: common.MapStr{
+	// 			"type":    b.Info.Name,
+	// 			"counter": counter,
+	// 		},
+	// 	}
+	// 	bt.client.Publish(event)
+	// 	logp.Info("Event sent")
+	// 	counter++
+	// }
 }
 
 // Stop stops compliancebeat.

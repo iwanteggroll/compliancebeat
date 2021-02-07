@@ -184,6 +184,83 @@ required: True
 
 --
 
+*`compliance.name`*::
++
+--
+Specific function name in script performing check
+
+type: keyword
+
+required: True
+
+--
+
+*`compliance.resultlevelnumber`*::
++
+--
+Overall numerical status result based on aggregate of individual checks in script
+
+type: byte
+
+required: True
+
+--
+
+*`compliance.resultlevel`*::
++
+--
+Overall status result based on aggregate of individual checks in script
+
+type: keyword
+
+required: True
+
+--
+
+*`compliance.status`*::
++
+--
+Individual check status level.
+
+type: keyword
+
+required: True
+
+--
+
+*`compliance.eventid`*::
++
+--
+Event ID for each run. ID will be the same for each individual check for a run.
+
+type: keyword
+
+required: True
+
+--
+
+*`compliance.messagetext`*::
++
+--
+Message text from individual check
+
+type: text
+
+required: True
+
+--
+
+*`compliance.category`*::
++
+--
+Category of check. Examples include ActiveDirectory, Web, FileServer.
+
+type: keyword
+
+required: True
+
+--
+
 [[exported-fields-docker-processor]]
 == Docker fields
 
