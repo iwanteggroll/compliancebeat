@@ -3,5 +3,20 @@
 ############################# {Beat} ######################################
 
 compliancebeat:
-  # Defines how often an event is sent to the output
-  period: 1s
+  checks:
+  - 
+    name: "ActiveDirectryCompliance.ps1"
+    path: "scripts"
+    category: "ActiveDirectory"
+    enabled: true
+    program: "powershell" 
+    period: 1m
+    params: []
+  - 
+    name: "TestCheck.py"
+    path: "scripts"
+    category: "ActiveDirectory"
+    enabled: false
+    program: "python" 
+    period: 30s
+    params: []
