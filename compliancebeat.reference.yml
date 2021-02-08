@@ -5,7 +5,7 @@
 compliancebeat:
   checks:
   - 
-    name: "ActiveDirectryCompliance.ps1"
+    name: "ActiveDirectoryCompliance.ps1"
     path: "scripts"
     category: "ActiveDirectory"
     enabled: true

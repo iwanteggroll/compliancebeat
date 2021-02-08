@@ -5,3 +5,6 @@
 /compliancebeat
 /compliancebeat.test
 *.pyc
+compliancebeat.code-workspace
+compliancebeat
+*.exe

@@ -1,9 +1,15 @@
-# {Beat}
+# Compliancebeat
 
-Welcome to {Beat}.
+Welcome to Compliancebeat.
 
 Ensure that this folder is at the following location:
 `${GOPATH}/src/github.com/iwanteggroll/compliancebeat`
+
+## Installing the packages
+
+Supported on Linux and Windows 8/2012 and higher.
+
+
 
 ## Getting Started with {Beat}
 
