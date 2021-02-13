@@ -14,6 +14,7 @@ Compliancebeat was borne out of a need to verify and report Active Directory com
 * Windows
   * Open an administrative powershell prompt
   * Run `.\installer.ps1 -elasticsearch_ip IP -team STRING` (no spaces for the team parameter)
+  * When prompted for credentials, the account needs to be a Domain Admin account.
 * Linux (TBD)
 
 ## Writing a Check
