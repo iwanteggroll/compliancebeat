@@ -1,122 +1,23 @@
 # Compliancebeat
 
-Welcome to Compliancebeat.
+## Description
 
-Ensure that this folder is at the following location:
-`${GOPATH}/src/github.com/iwanteggroll/compliancebeat`
+Compliancebeat is a custom elastic beat designed to check services, configurations, connectivity, etc. and send the status to an elasticsearch server with the results viewable in kibana. Modeled after Nagios, Compliancebeat is similar but it's designed to run locally by calling python3 or powershell scripts to perform the checks and return a status level along with an error message. With the power of elasticsearch and kibana, the raw data can be transformed and visualized into various dashboards.
 
-## Installing the packages
+Compliancebeat was borne out of a need to verify and report Active Directory compliance during blue/red team events. During these events, frustrated red teams normally try to leverage credential reuse within an Active Directory enclave but discover an environment is not properly setup even though Active Directory is a requirement for blue teams to implement. Active Directory checks are the initial use case but compliancebeat can support many more checks. If the check can be written in python3 or powershell, then compliancebeat can provide a framework to format and send the data into a elasticsearch/kibana instance.
 
-Supported on Linux and Windows 8/2012 and higher.
+## Supported Operating Systems
+* Linux w/ systemd and python3
+* Microsoft Windows 8/2012 and higher
 
+## Installing the Packages
+* Windows
+  * Open an administrative powershell prompt
+  * Run `.\installer.ps1 -elasticsearch_ip IP -team STRING` (no spaces for the team parameter)
+  * When prompted for credentials, the account needs to be a Domain Admin account.
+* Linux (TBD)
 
+## Writing a Check
 
-## Getting Started with {Beat}
+Under the `scripts` directory, are 2 examples of how to write a check, one in powershell (ActiveDirectoryCompliance.ps1) and the other in python (TestCheck.py). The general structure is to instantiante a result object globally, perform a check within a function, adding a message to the result within the function, calling the function to execute, tabulate the results, and print the json out so compliancebeat can read it and send it off to elasticsearch.
 
-### Requirements
-
-* [Golang](https://golang.org/dl/) 1.7
-
-### Init Project
-To get running with {Beat} and also install the
-dependencies, run the following command:
-
-```
-make setup
-```
-
-It will create a clean git history for each major step. Note that you can always rewrite the history if you wish before pushing your changes.
-
-To push {Beat} in the git repository, run the following commands:
-
-```
-git remote set-url origin https://github.com/iwanteggroll/compliancebeat
-git push origin master
-```
-
-For further development, check out the [beat developer guide](https://www.elastic.co/guide/en/beats/libbeat/current/new-beat.html).
-
-### Build
-
-To build the binary for {Beat} run the command below. This will generate a binary
-in the same directory with the name compliancebeat.
-
-```
-make
-```
-
-
-### Run
-
-To run {Beat} with debugging output enabled, run:
-
-```
-./compliancebeat -c compliancebeat.yml -e -d "*"
-```
-
-
-### Test
-
-To test {Beat}, run the following command:
-
-```
-make testsuite
-```
-
-alternatively:
-```
-make unit-tests
-make system-tests
-make integration-tests
-make coverage-report
-```
-
-The test coverage is reported in the folder `./build/coverage/`
-
-### Update
-
-Each beat has a template for the mapping in elasticsearch and a documentation for the fields
-which is automatically generated based on `fields.yml` by running the following command.
-
-```
-make update
-```
-
-
-### Cleanup
-
-To clean  {Beat} source code, run the following command:
-
-```
-make fmt
-```
-
-To clean up the build directory and generated artifacts, run:
-
-```
-make clean
-```
-
-
-### Clone
-
-To clone {Beat} from the git repository, run the following commands:
-
-```
-mkdir -p ${GOPATH}/src/github.com/iwanteggroll/compliancebeat
-git clone https://github.com/iwanteggroll/compliancebeat ${GOPATH}/src/github.com/iwanteggroll/compliancebeat
-```
-
-
-For further development, check out the [beat developer guide](https://www.elastic.co/guide/en/beats/libbeat/current/new-beat.html).
-
-
-## Packaging
-
-The beat frameworks provides tools to crosscompile and package your beat for different platforms. This requires [docker](https://www.docker.com/) and vendoring as described above. To build packages of your beat, run the following command:
-
-```
-make release
-```
-
-This will fetch and create all images required for the build process. The whole process to finish can take several minutes.
