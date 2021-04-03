@@ -57,12 +57,6 @@ function Check-ADDomainConnectionAndTimeSkew
 	$result.AddComplianceMessage($msg)
 }
 
-{
-    $messageText = "Got Name Parameter: " + $Name
-    $msg = New-ComplianceMessage -Title $MyInvocation.MyCommand -Message $messageText -Level OK
-    $result.AddComplianceMessage($msg)
-}
-
 Check-CurrentAccountForKerberos
 Check-ADDomainConnectionAndTimeSkew
 
